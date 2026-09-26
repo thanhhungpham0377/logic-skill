@@ -1,0 +1,22 @@
+name: Stewardship inspection
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run local stewardship inspection
+        run: python scripts/inspect_repo.py --profile local --json --write-report
+      - name: Upload stewardship report
+        uses: actions/upload-artifact@v4
+        with:
+          name: stewardship-report
+          path: .steward/reports/

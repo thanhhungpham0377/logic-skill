@@ -1,0 +1,42 @@
+# Logic Model
+
+## Behavior map
+
+For each action, capture:
+
+| Field | Question |
+|---|---|
+| Actor | Who or what initiates it? |
+| Preconditions | What must already be true? |
+| Input | What values and boundaries are accepted? |
+| Transition | What state changes? |
+| Effects | What else changes: data, cache, UI, events, notifications? |
+| Failure | What can fail and is the operation atomic? |
+| Retry | Is retry safe, idempotent, or forbidden? |
+| Recovery | How does the system return to a known state? |
+
+## State model
+
+Represent each state with entry conditions, permitted actions, exit transitions, and terminality. Explicitly list forbidden transitions. If a state machine is not appropriate, document why and use a decision table instead.
+
+## Invariant classes
+
+- **Data:** relationships, uniqueness, conservation, ordering, referential integrity.
+- **Authorization:** actor and ownership constraints remain true at mutation time.
+- **Lifecycle:** only legal transitions occur; terminal states stay terminal unless an explicit reversal exists.
+- **Concurrency:** duplicate, stale, or reordered actions cannot create invalid results.
+- **UI:** derived state reflects source state; loading/error/empty/disabled states do not contradict one another.
+- **Cross-cutting:** theme, locale, accessibility, responsive layout, and feature flags cover every relevant surface.
+
+## Edge-case matrix
+
+At minimum consider: empty, zero, maximum, malformed, duplicate, stale, unauthorized, unavailable dependency, timeout, partial success, retry, cancellation, refresh, back navigation, and concurrent mutation. Select only cases relevant to the behavior, and explain exclusions.
+
+## Evidence levels
+
+1. **Observed:** existing code/test/log proves the behavior.
+2. **Derived:** follows from a documented state or dependency model.
+3. **Assumed:** needed to proceed but not confirmed.
+4. **Unverified:** a risk requiring a test, inspection, or user decision.
+
+Never present an assumption as an observed invariant.

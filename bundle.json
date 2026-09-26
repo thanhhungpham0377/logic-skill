@@ -1,0 +1,26 @@
+{
+  "name": "hung-toolkit",
+  "display_name": "Hung Toolkit",
+  "version": "0.1.0",
+  "components": [
+    {
+      "id": "logic",
+      "display_name": "Logic",
+      "path": "components/Logic",
+      "owns": "behavioral completeness, persistent logic memory, invariants, reusable patterns"
+    },
+    {
+      "id": "ops",
+      "display_name": "Ops",
+      "path": "components/Ops",
+      "owns": "repository hygiene, provenance, maintenance, handoff readiness"
+    },
+    {
+      "id": "spec-driven",
+      "display_name": "Spec Driven",
+      "path": "components/Spec-Driven",
+      "owns": "product scope, specifications, delivery workflow, release gates"
+    }
+  ],
+  "non_overlap": true
+}

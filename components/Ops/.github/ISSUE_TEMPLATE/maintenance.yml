@@ -1,0 +1,26 @@
+name: Maintenance finding
+description: Report repository stewardship, readiness, or lifecycle debt
+title: "maintenance: "
+labels: [maintenance]
+body:
+  - type: textarea
+    id: finding
+    attributes:
+      label: Finding
+      description: Describe the evidence and affected path or repository surface.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - repository hygiene
+        - metadata
+        - documentation
+        - provenance
+        - public release
+        - handoff
+        - lifecycle
+    validations:
+      required: true
