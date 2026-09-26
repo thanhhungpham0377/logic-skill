@@ -1,5 +1,7 @@
 # Hung Toolkit
 
+> A durable development context for coding agents: define the product, reason about behavior, and keep the repository healthy across sessions.
+
 Hung Toolkit packages three complementary development toolkits in one distributable bundle:
 
 1. **Logic** — behavioral completeness, persistent logic memory, state transitions, invariants, and reusable logic patterns.
@@ -25,6 +27,12 @@ Spec Driven → Logic → implementation → Ops
 
 Use the Spec Driven component to define what to build, Logic to preserve behavioral correctness across conversations and projects, and Ops to keep the resulting repository maintainable and handoff-ready.
 
+## Start here
+
+Coding agents should read [AGENTS.md](AGENTS.md) before making changes. It defines routing, the conversation protocol, memory rules, and completion evidence.
+
+For a detailed guide, read [docs/agent-integration.md](docs/agent-integration.md). For the persistent logic memory, read [docs/logic-memory.md](docs/logic-memory.md).
+
 ## Installation
 
 Install each component using its own instructions. The component boundaries are intentional:
@@ -36,7 +44,7 @@ Install each component using its own instructions. The component boundaries are 
 For reusable logic discovery, use:
 
 ```powershell
-python components/Logic/../..\logic-toolkit\scripts\scan_logic.py --project D:\path\to\project --write-report
+python components/Logic/scripts/scan_logic.py --project D:\path\to\project --write-report
 ```
 
-When distributing the bundle outside this workspace, copy the reusable logic library from the standalone `logic-toolkit/library/` package alongside the bundle.
+The reusable logic library is bundled at `components/Logic/reusable-library/`.
