@@ -1,23 +1,24 @@
 # Source Catalog
 
-This toolkit is an original composition. It borrows concepts, not code, and should preserve attribution when an implementation later adopts a specific upstream project.
+Logic Toolkit is an original, product-behavior-focused composition. It borrows ideas, not code. This catalog documents conceptual references; it does not imply a dependency or integration.
 
-| Source | Adopted idea | Boundary / exclusion |
+| Source | Relevant concept | Boundary |
 |---|---|---|
-| [archagent](https://github.com/BenedatLLC/archagent) | Architecture described as subsystems, lifecycles, flows, and machine-checkable invariants; deterministic checkers with LLM proposals | We focus on behavior completeness during feature work, not architecture enforcement only |
-| [grove](https://github.com/alxshelepenok/grove) | Explicit protocol invariants, evidence-bound completion, dependency/causality thinking | We do not adopt its workflow protocol, persistence model, or orchestration |
-| [OpenZeppelin/daml-props](https://github.com/OpenZeppelin/daml-props) | Generate action sequences and check invariants after transitions | We use this as a testing strategy, not a DAML dependency |
-| [Agent Rigor](https://github.com/MeherBhaskar/agent-rigor) | Actionable gates, atomic transitions, anti-rationalization, and failure-mode thinking | We keep the scope to application logic, not a general agent operating system |
-| [OpenAI design-system rules](https://github.com/openai/skills/blob/main/skills/.curated/figma-create-design-system-rules/SKILL.md) | Specific, actionable, prioritized rules with progressive disclosure | Design-system consistency is one domain of impact analysis, not the whole toolkit |
-| [Sensei](https://github.com/globulario/sensei) | Behavioral memory, invariants, failure modes, proof obligations, and architectural impact | We do not claim graph extraction, closure, or governance features |
+| [Stately XState](https://github.com/statelyai/xstate) | Explicit state machines/statecharts, transitions, visualization, and model-based testing | Modeling reference only; no required XState runtime. |
+| [Hypothesis stateful testing](https://hypothesis.readthedocs.io/en/latest/stateful.html) | Generated action sequences and invariants across changing states | Testing technique reference; Python API is optional and stack-specific. |
+| [fast-check model-based testing](https://fast-check.dev/docs/advanced/model-based-testing/) | Commands, guards/preconditions, model-vs-system checks, and generated sequences | Testing technique reference; no JavaScript dependency is required. |
+| [Stateful property-testing tutorial](https://github.com/stevana/property-based-testing-stateful-systems-tutorial) | Stateful sequence generation and invariant checking | Deeper systems-testing ideas; apply proportionately. |
+| [OpenZeppelin/daml-props](https://github.com/OpenZeppelin/daml-props) | Checking invariants after generated transitions | Domain-specific example, not a toolkit dependency. |
+| [OpenAI design-system rules](https://github.com/openai/skills/blob/main/skills/.curated/figma-create-design-system-rules/SKILL.md) | Actionable visual-system rules and progressive disclosure | Narrowly informs visual consistency analysis. |
+| [archagent](https://github.com/BenedatLLC/archagent) | Machine-checkable invariants | Adjacent architecture focus; use only where an invariant directly protects product behavior. |
 
-The research indicates that Logic needs a lightweight, agent-facing behavior model that connects persistent project memory to state transitions, dependent effects, and repeatable edge-case checks. See `docs/logic-source-evaluation.md` for a dated comparison of more popular and more specialized candidates.
+General agent memory, task tracking, coding workflow, and multi-agent orchestration are intentionally excluded from the core method. See [the source evaluation](../../../docs/logic-source-evaluation.md) for scope and rationale. `.logic/` is a small record of product behavior decisions, not a general agent-memory or coordination system.
 
-## Excluded overlap
+## Non-overlap
 
-The existing local toolkits remain the owners of their current concerns:
+- `spec-driven-product-toolkit` owns product scope, requirements/specification authoring, acceptance criteria, delivery workflow, and release gates.
+- Logic Toolkit owns behavior completeness: state, transitions, conditions, effects, invariants, cross-surface impact, and failure/recovery paths.
+- `ops-toolkit` owns repository hygiene, provenance, maintenance, and handoff.
+- Multi-agent delegation and orchestration belong to a separate tool.
 
-- `spec-driven-product-toolkit`: profiles, specification-to-implementation workflow, product tests, technical audits, and release-quality gates.
-- `ops-toolkit`: repository hygiene, authorship/attribution, provenance, documentation integrity, public release, handoff, and maintenance checks.
-
-This toolkit therefore does not add replacement profiles, release gates, repository inspection reports, attribution files, or a second audit lifecycle. It contributes only behavior models and evidence about application logic.
+Logic records may link to specifications, code, and tests, but do not copy or replace their authoritative artifacts.

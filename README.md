@@ -6,7 +6,7 @@
 
 Hung Toolkit packages three complementary development toolkits in one distributable bundle. / Hung Toolkit đóng gói ba toolkit bổ trợ cho nhau:
 
-1. **Logic** — behavioral completeness, persistent logic memory, state transitions, invariants, and reusable logic patterns. / Tính đầy đủ của behavior, logic memory xuyên hội thoại, state transition, invariant và pattern tái sử dụng.
+1. **Logic** — product-behavior completeness: states, transitions, conditions, effects, invariants, failures, and cross-surface consistency. Project logic records preserve decisions across sessions as a supporting mechanism. / Tính đầy đủ logic hành vi sản phẩm: state, transition, điều kiện, effect, invariant, lỗi và tính nhất quán giữa các bề mặt. Hồ sơ logic dự án giúp lưu quyết định xuyên phiên như một cơ chế hỗ trợ.
 2. **Ops** — repository hygiene, provenance, documentation integrity, maintenance, and handoff readiness. / Vệ sinh repository, provenance, tài liệu, bảo trì và khả năng bàn giao.
 3. **Spec Driven** — product specifications, implementation workflow, quality gates, and release profiles. / Đặc tả sản phẩm, workflow triển khai, quality gate và profile release.
 
@@ -35,13 +35,13 @@ flowchart LR
     D -. feedback .-> B
 ```
 
-Use Spec Driven to define what to build, Logic to preserve behavioral correctness across conversations and projects, and Ops to keep the repository maintainable and handoff-ready. / Dùng Spec Driven để xác định cần xây gì, Logic để giữ behavior đúng xuyên các cuộc hội thoại và dự án, Ops để duy trì repository.
+Use Spec Driven to define what to build, Logic to analyze whether feature behavior is complete and coherent, and Ops to keep the repository maintainable and handoff-ready. A separate multi-agent tool owns delegation and coordination. / Dùng Spec Driven để xác định cần xây gì, Logic để phân tích behavior tính năng đã đầy đủ và nhất quán chưa, Ops để duy trì repository. Tool multi-agent riêng phụ trách delegation và điều phối.
 
 ## Start here
 
 Coding agents should read [AGENTS.md](AGENTS.md) before making changes. It defines routing, the conversation protocol, memory rules, and completion evidence.
 
-For a detailed guide, read [docs/agent-integration.md](docs/agent-integration.md). For the persistent logic memory, read [docs/logic-memory.md](docs/logic-memory.md).
+For a detailed guide, read [docs/agent-integration.md](docs/agent-integration.md). For project product-logic records, read [docs/logic-memory.md](docs/logic-memory.md).
 
 ## Quickstart
 
@@ -118,9 +118,9 @@ The toolkit does not silently invent missing behavior. If an unresolved decision
 
 | Component | Use it for | Does not own |
 |---|---|---|
-| Logic | states, transitions, invariants, edge cases, behavior memory, reusable patterns | product scope, repository hygiene |
+| Logic | product states, transitions, invariants, edge cases, effects, failure/recovery, cross-surface consistency | product scope/specification, repository hygiene, multi-agent orchestration |
 | Ops | repository hygiene, provenance, maintenance, handoff readiness | feature behavior, product specifications |
-| Spec Driven | requirements, delivery workflow, profiles, release gates | cross-conversation logic memory |
+| Spec Driven | requirements, delivery workflow, profiles, release gates | behavior state/invariant analysis |
 
 The components may be used together, but their artifacts remain separate.
 
@@ -193,6 +193,6 @@ For reusable logic discovery, use:
 python components/Logic/scripts/scan_logic.py --project D:\path\to\project --write-report
 ```
 
-The reusable logic library is bundled at `components/Logic/reusable-library/`.
+The reusable product-behavior logic library is bundled at `components/Logic/reusable-library/`.
 
-Research basis: [Logic source evaluation](docs/logic-source-evaluation.md) records the candidate repositories, observed popularity, fit, and the features that should inform future revisions.
+Research basis: [Logic source evaluation](docs/logic-source-evaluation.md) focuses on state modeling and invariant/stateful testing. General agent memory, task-tracking, and multi-agent orchestration repositories are explicitly outside Logic's core scope.

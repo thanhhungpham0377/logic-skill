@@ -1,6 +1,6 @@
 # Reusable Logic Library
 
-This library stores generalized, evidence-backed behavior patterns that can transfer between projects. It is not a dump of project requirements.
+This library stores generalized, evidence-backed **product behavior** patterns that can transfer between projects (such as lifecycle transitions, idempotency rules, or cross-surface invariants). It is not a dump of project requirements, generic coding-agent memory, task workflows, or multi-agent orchestration patterns.
 
 ## Promotion rules
 

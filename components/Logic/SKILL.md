@@ -1,32 +1,47 @@
 ---
 name: logic-toolkit
-description: Maintain persistent, project-specific behavior memory for coding agents; analyze feature states, transitions, dependencies, invariants, and edge cases, and identify reusable cross-project logic. Use across conversations whenever product behavior changes. Does not own product specifications or repository stewardship.
+description: Analyze and preserve product feature logic: actors, states, transitions, invariants, effects, failure paths, and cross-surface consistency. Use when designing or changing application behavior to expose missing logic before implementation and verify it afterward. Does not own product specifications, repository stewardship, or multi-agent orchestration.
 ---
 
 # Logic Toolkit
 
-Use this toolkit to make behavior complete before code is written and to keep changes consistent with existing behavior. The goal is not to produce more prose; it is to expose the logic that a feature depends on and turn important rules into checks.
+Use this toolkit to make product behavior logically complete before code is written and consistent with existing behavior afterward. The goal is not to produce more prose; it is to expose missing states, transitions, conditions, effects, and failure paths, then turn important rules into checks.
 
-## Persistent conversation mode
+## Scope and boundaries
 
-When this toolkit is installed in a project, treat `.logic/` as the project's durable behavioral memory. For every conversation that touches a feature, behavior, bug, refactor, UI state, API contract, or workflow:
+This is a **product-behavior reasoning tool**, not a general agent-memory or multi-agent tool. Its subject is application semantics: what actors can do, how state changes, what must remain true, how dependent surfaces respond, and what happens on failure. `.logic/` is only the compact project record needed to preserve those behavior decisions across development sessions; session notes are checkpoints, not chat history or agent coordination.
 
-1. Read `.logic/README.md`, `.logic/index.md`, and the relevant feature record before proposing implementation.
+- Spec Driven owns product intent, scope, requirements, acceptance criteria, and delivery gates. Logic takes an established or emerging capability and checks whether its behavior is coherent and complete.
+- Logic owns behavior maps, state/transition models, invariants, edge cases, effects, and evidence for those rules.
+- Ops owns repository health, provenance, maintenance, and handoff.
+- Agent assignment, delegation, shared agent state, and orchestration belong to a separate multi-agent tool; do not add them here.
+
+## Ongoing product-logic mode
+
+When installed, consult `.logic/` whenever a product feature or behavior is being designed or changed. Treat it as a durable behavior record, not the purpose of the toolkit. For each relevant feature discussion:
+
+1. Read `.logic/README.md`, `.logic/index.md`, and the relevant feature record before proposing implementation; if no record exists, inspect the code and the user's stated intent.
 2. Match the user's request to an existing feature, state, invariant, decision, or pattern. Do not assume a new conversation means a new logic context.
-3. Summarize the existing logic that is affected, identify missing or conflicting parts, and ask focused clarification questions when an unresolved choice changes behavior.
+3. Summarize affected existing behavior and identify gaps or contradictions. Ask a focused clarification question only when an unresolved choice materially changes product behavior.
 4. During the exchange, maintain a distinction between confirmed facts, user decisions, proposed logic, and unverified assumptions.
-5. Before implementation, update the relevant feature record or create one under `.logic/features/`; do not wait until the end if the conversation establishes a durable rule.
-6. After implementation or a decision, append a concise session entry to `.logic/sessions/` and update `.logic/index.md` so later conversations can recover the reasoning.
+5. Before implementation, update the relevant behavior record or create one under `.logic/features/` when a durable behavior rule has been decided.
+6. After a meaningful decision or implementation, add a concise checkpoint under `.logic/sessions/` and update `.logic/index.md` only as needed to make the authoritative logic easy to find.
 
 This is an active protocol, not a one-time documentation task. If the memory is stale, contradictory, or missing, surface that explicitly and reconcile it with the user before silently overwriting it.
 
 Do not store secrets, raw transcripts, personal data, or every conversational detail. Store only durable behavioral knowledge and links to code/tests.
 
+## Product behavior analysis loop
+
+For the changed capability, map actor/action, preconditions, input boundaries, current state, legal and forbidden transitions, effects, success, failure, retry, cancellation, and recovery. Trace the change to dependent data, UI surfaces, APIs, authorization, cache, events, accessibility, localization, and other consumers as applicable. State which cases are out of scope and why. Prefer an existing verified pattern over inventing a new one.
+
+For visual behavior, reason across semantic roles rather than one component at a time. For example, a theme switch must keep foreground/background contrast and visibility coherent for text, surfaces, borders, icons, focus, disabled/loading/error states, overlays, charts, images, and native controls in every supported theme.
+
 ## Cross-project logic reuse
 
 When installed through `logic-toolkit`, also consult the reusable logic library. Before inventing a rule, search the library for an applicable pattern. After a feature stabilizes, scan the project's `.logic/` records for candidates that are portable across projects.
 
-Never promote a project-specific rule automatically. A candidate must be generalized, stripped of identifiers and assumptions, linked to evidence, and reviewed for portability before entering the shared library. Keep project-specific details in `.logic/features/`; keep reusable abstractions in the library.
+Never promote a project-specific rule automatically. A candidate must be generalized, stripped of identifiers and assumptions, linked to evidence, and reviewed for portability before entering the shared library. Keep project-specific behavior in `.logic/features/`; keep reusable product-behavior abstractions in the library. The scanner finds possible text candidates only; it does not infer, validate, or promote logic.
 
 ## Core distinction
 
@@ -38,10 +53,11 @@ Do not replace a product spec with a logic map, and do not treat a clean reposit
 
 ## Strict non-overlap boundary
 
-This toolkit owns **behavioral completeness and continuity of an application's behavior across development conversations**. It does not own:
+This toolkit owns **logical completeness and consistency of product behavior during development**. It does not own:
 
 - product discovery, prioritization, roadmap, requirements authoring, acceptance criteria, release profiles, or implementation/release gates;
 - repository metadata, attribution, provenance, documentation hygiene, public-release readiness, handoff readiness, or maintenance lifecycle checks;
+- multi-agent delegation/orchestration, generic agent memory or chat-history retrieval;
 - generic code style, security review, dependency governance, CI orchestration, or project management.
 
 Use the other toolkits when those are the primary request. Invoke this toolkit only when the question is whether a behavior is logically complete and consistent across its possible states and effects.
@@ -60,15 +76,16 @@ If a task crosses boundaries, keep one owner per concern and pass artifacts betw
 
 Before editing behavior:
 
-1. Identify the changed capability and its entry points.
-2. Locate existing state, transitions, derived state, side effects, persistence, and consumers.
-3. Build a behavior map: actor/action, preconditions, state change, effects, success, failure, retry, cancellation, and recovery.
+1. Identify the capability and behavior change; use the product spec as context when available, without rewriting its scope or acceptance criteria.
+2. Locate existing states, transitions, derived state, side effects, persistence, permissions, and consumers.
+3. Build a behavior map: actor/action, preconditions, input boundaries, state change, effects, success, failure, retry, cancellation, and recovery.
 4. List invariants that must hold before, during, and after each transition.
 5. Trace impact to dependent UI, API, permissions, cache, events, analytics, notifications, and accessibility states.
 6. Find an existing pattern to reuse before introducing a new abstraction.
-7. Implement the smallest change that preserves the map.
-8. Verify happy path, invalid input, boundary values, repeated action, refresh/reload, concurrency, permission changes, and partial failure as applicable.
-9. Record newly discovered reusable rules in the project's logic artifacts.
+7. Identify the smallest useful verification: example-based tests, decision tables, stateful/model-based tests, or property-based tests where suitable. Do not add a framework dependency merely to use a testing technique.
+8. Implement the smallest change that preserves the behavior model.
+9. Verify happy path, invalid input, boundary values, repeated action, refresh/reload, concurrency, permission changes, and partial failure as applicable.
+10. Record changed durable behavior and any reusable-rule candidate in the appropriate logic artifact.
 
 If the change is too ambiguous to model, pause implementation and state the missing assumption rather than silently inventing behavior.
 
@@ -116,4 +133,4 @@ A logic change is complete only when:
 - no existing reusable pattern was bypassed without rationale;
 - the final report names unverified assumptions and residual risk.
 
-For the conceptual model and artifact templates, read [references/logic-model.md](references/logic-model.md). For upstream provenance and exclusions, read [references/source-catalog.md](references/source-catalog.md).
+For the conceptual model and artifact templates, read [references/logic-model.md](references/logic-model.md). For in-scope upstream concepts and exclusions, read [references/source-catalog.md](references/source-catalog.md).

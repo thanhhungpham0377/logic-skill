@@ -7,7 +7,7 @@ These instructions are the entrypoint for coding agents using Hung Toolkit. Appl
 Hung Toolkit coordinates three independent concerns:
 
 - **Spec Driven:** what the product should build and how delivery is gated.
-- **Logic:** whether behavior is complete across states, transitions, effects, failures, and conversations.
+- **Logic:** whether product behavior is complete and coherent across states, transitions, effects, failures, and dependent surfaces.
 - **Ops:** whether the repository is clean, attributable, maintainable, and handoff-ready.
 
 Do not merge their checklists or let one component silently take ownership of another's decisions.
@@ -21,9 +21,9 @@ Do not merge their checklists or let one component silently take ownership of an
 | Repository cleanup, provenance, docs, maintenance, handoff | `components/Ops/` | evidence-backed ops report |
 | Feature work involving more than one concern | read Spec Driven → Logic → Ops | separate artifacts with explicit ownership |
 
-## Logic conversation protocol
+## Logic feature protocol
 
-When a project contains `.logic/`, every conversation that touches a feature or behavior must:
+When a project contains `.logic/`, every development task that designs or changes product behavior must:
 
 1. Read `.logic/README.md` and `.logic/index.md`.
 2. Find the existing feature record before proposing a new model.
@@ -31,10 +31,12 @@ When a project contains `.logic/`, every conversation that touches a feature or 
 4. Check states, legal/forbidden transitions, dependencies, side effects, failure/retry, persistence, authorization, and user-visible states.
 5. Ask focused clarification questions when an answer changes behavior. Do not block on a cosmetic choice covered by an existing pattern.
 6. Update `.logic/features/`, `.logic/invariants.md`, or `.logic/decisions.md` when durable logic changes.
-7. Add a compact checkpoint under `.logic/sessions/` after a meaningful decision or implementation.
+7. Add a compact checkpoint under `.logic/sessions/` after a meaningful behavior decision or implementation.
 8. Update `.logic/index.md` so another conversation can recover the context.
 
 Do not store raw transcripts, secrets, or personal data. Separate confirmed facts, user decisions, proposals, and unverified assumptions.
+
+`.logic/` is a supporting record of product behavior decisions, not a general agent memory engine, chat archive, task tracker, or multi-agent coordination system. Delegation and coordination belong to a separate tool. Spec Driven remains the owner of product scope/specification; Logic analyzes behavior completeness and consistency without replacing requirements or acceptance criteria.
 
 ## Cross-project reuse
 

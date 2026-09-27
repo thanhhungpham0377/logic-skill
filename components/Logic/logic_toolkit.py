@@ -80,7 +80,7 @@ def main() -> int:
         },
         "ownership": {
             "spec-driven": "product scope, specifications, delivery workflow, release gates",
-            "logic": "cross-conversation behavior memory, state models, invariants, reusable patterns",
+            "logic": "product behavior completeness, state models, invariants, cross-surface effects, reusable behavior patterns",
             "ops": "repository/product hygiene, provenance, maintenance, handoff readiness",
         },
         "non_overlap": True,
@@ -111,14 +111,14 @@ def main() -> int:
         write_text(pointer, f"# {name}\n\nInstalled by `toolkit`. Source of truth: `{path}`.\n")
 
     logic_state = target / ".logic"
-    write_text(logic_state / "README.md", """# Logic Memory\n\nThis is the durable behavioral memory for the project. Every conversation that changes a feature must read the index and update the relevant feature record, invariant, decision, or session checkpoint.\n\nKeep confirmed facts, user decisions, proposals, and unverified assumptions distinct. Do not store raw transcripts or secrets.\n""")
+    write_text(logic_state / "README.md", """# Product Logic Records\n\nThese records preserve the project's confirmed product behavior decisions so later feature work can find the relevant states, transitions, invariants, effects, and unresolved behavior questions. They support product-logic analysis; they are not a general agent memory engine, chat archive, task tracker, or multi-agent coordination channel.\n\nKeep confirmed facts, user decisions, proposals, and unverified assumptions distinct. Link to authoritative product specifications rather than copying them. Do not store raw transcripts or secrets.\n""")
     write_text(logic_state / "index.md", """# Logic Memory Index\n\n| Feature/concept | Record | States/invariants | Last reviewed | Open questions |\n|---|---|---|---|---|\n""")
     write_text(logic_state / "features/.gitkeep", "")
     write_text(logic_state / "sessions/.gitkeep", "")
     write_text(logic_state / "LIBRARY.md", f"# Reusable Logic Library\n\nShared library source: `{ROOT / 'library'}`. Search it before inventing a new cross-cutting behavior.\nUse `scan_logic.py` to propose candidates after a feature stabilizes.\n")
 
     write_text(state / "manifest.json", json.dumps(manifest, indent=2) + "\n")
-    write_text(state / "README.md", """# Logic Toolkit integration\n\nThis directory is the durable behavior memory for the project. Read it before feature changes and update it when behavior decisions become durable.\n\nOwnership: Spec Driven defines product scope and delivery; Logic maintains behavior memory, state/invariant analysis, and cross-project patterns; Ops maintains repository health and handoff readiness.\n\nState directories remain separate: `.spec-product/`, `.logic/`, and `.steward/`.\n""")
+    write_text(state / "README.md", """# Logic Toolkit integration\n\nThis directory contains project-specific product behavior records. Read relevant records when designing or changing a feature, then update them when behavior decisions become durable. These records support logic analysis; they are not a general agent-memory engine or multi-agent coordination channel.\n\nOwnership: Spec Driven defines product scope and delivery; Logic analyzes behavior completeness, states, invariants, effects, and cross-project behavior patterns; Ops maintains repository health and handoff readiness. Multi-agent assignment and coordination belong to a separate tool.\n\nState directories remain separate: `.spec-product/`, `.logic/`, and `.steward/`.\n""")
     write_text(state / "index.md", """# Logic Memory Index\n\nAdd one row for each durable feature or cross-cutting behavior.\n\n| Feature/concept | Record | States/invariants | Last reviewed | Open questions |\n|---|---|---|---|---|\n""")
     write_text(state / "features/.gitkeep", "")
     write_text(state / "sessions/.gitkeep", "")

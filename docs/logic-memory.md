@@ -1,4 +1,6 @@
-# Logic Memory Reference
+# Project Product-Logic Records
+
+These files preserve durable decisions about **application behavior** so later development work does not reintroduce missing or contradictory logic. They are a supporting record format, not a generic agent memory engine, transcript archive, task graph, or multi-agent coordination channel. Keep scope, product requirements, and acceptance criteria authoritative in Spec Driven artifacts and link to them instead of copying them here.
 
 ## Files
 

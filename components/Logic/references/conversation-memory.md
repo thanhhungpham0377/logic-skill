@@ -1,4 +1,6 @@
-# Conversation Memory Protocol
+# Product Logic Record Protocol
+
+These records preserve confirmed product behavior decisions between development sessions. They are not a generic agent memory, transcript retrieval, task tracking, or multi-agent coordination system. Keep product scope and acceptance criteria in Spec Driven artifacts and link to them here as needed.
 
 ## Feature record
 

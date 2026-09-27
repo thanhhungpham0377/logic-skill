@@ -1,38 +1,39 @@
 # Logic Toolkit Source Evaluation
 
-Snapshot researched: 2026-09-27. GitHub stars are approximate popularity signals, not quality scores; they change over time. Repository descriptions and activity were reviewed alongside fit to Logic Toolkit's scope.
+Reviewed: 2026-09-27. This comparison is scoped to **application behavior logic**: modeling states and transitions, expressing invariants, finding edge cases, and checking behavior. Popularity is a discovery signal, not evidence of quality or fit. No source code is copied or dependency is required by this evaluation.
 
-## Strongest relevant sources
+## In-scope references
 
-| Repository | Stars observed | Strong contribution | Fit and limitation |
-|---|---:|---|---|
-| [agentmemory](https://github.com/rohitg00/agentmemory) | ~28.9k | Broad persistent coding-agent memory, many agent integrations, retrieval/evaluation work | Strongest popularity and mature memory reference; much broader runtime and scope than our behavior-contract library |
-| [Beads](https://github.com/gastownhall/beads) | ~26.9k (Sep 3 snapshot) | Git-backed dependency graph and long-horizon task continuity | Strong for task/work dependency memory, not a feature invariant catalog |
-| [Superpowers](https://github.com/obra/superpowers) | ~285k (search snapshot) | Agent skills, workflow routing, session-start behavior and structured development methodology | Very strong skill/workflow reference; not a durable project behavior memory system |
-| [projectmem](https://github.com/riponcm/projectmem) | 834 | Local-first typed events for issues, attempts, fixes and decisions; MCP integrations and precheck | Closest workflow/memory reference for recording project experience; does not specialize in complete feature state/invariant models |
-| [OKF Agent Memory](https://github.com/okf-memory/okf-agent-memory) | 708 | Search-before-write, provenance/trust metadata, progressive disclosure, validation and graph relationships | Strong architecture reference for knowledge hygiene; standard/tooling approach may be heavier than a Markdown-first toolkit |
-| [common-knowledge](https://github.com/shihabshahrier/common-knowledge) | GitHub page showed no star count in fetched snapshot | Git-backed Markdown knowledge base, per-project and global learning separation, multi-agent distribution | Closest lightweight file-based pattern; activity/scale evidence is limited in the available snapshot |
-| [archagent](https://github.com/BenedatLLC/archagent) | 0 in fetched page snapshot | Extracts architecture invariants and checks drift deterministically | Excellent conceptual fit for enforceable invariants; currently low community adoption, so use its ideas selectively |
-| [Grove](https://github.com/alxshelepenok/grove) | 24 | Explicit state/protocol invariants and evidence-bound completion | Useful formal workflow ideas; broad orchestration and AGPL-3.0 are not assumed or copied |
+| Source | Relevant contribution | Fit and boundary |
+|---|---|---|
+| [Stately XState](https://github.com/statelyai/xstate) | Statecharts/state machines, explicit transitions, visual inspection, and model-based testing concepts | Strong reference for making behavior and legal paths visible. Logic Toolkit borrows the modeling approach; it does not require XState or prescribe a runtime. |
+| [Hypothesis stateful testing](https://hypothesis.readthedocs.io/en/latest/stateful.html) | Generate action sequences against a model and check invariants after each action | Strong testing reference for stateful behavior. Python-specific API; use only when suitable for the product stack. |
+| [fast-check model-based testing](https://fast-check.dev/docs/advanced/model-based-testing/) | Commands, preconditions, model-vs-real-system checks, and generated command sequences | Useful language-agnostic testing pattern with JavaScript/TypeScript examples; not a required test framework. |
+| [Property-based testing of stateful systems](https://github.com/stevana/property-based-testing-stateful-systems-tutorial) | Stateful property testing, generated sequences, and failure exploration | Useful deeper treatment for complex stateful systems; can be more machinery than ordinary UI/product features need. |
+| [OpenZeppelin/daml-props](https://github.com/OpenZeppelin/daml-props) | Generate action sequences and check invariants after transitions | A domain-specific example of invariant-based testing, not a DAML dependency or general product workflow. |
+| [OpenAI design-system rules](https://github.com/openai/skills/blob/main/skills/.curated/figma-create-design-system-rules/SKILL.md) | Specific, actionable rules and progressive disclosure | Relevant narrowly to cross-surface visual consistency; not a substitute for product state/transition analysis. |
 
-## Assessment
+## Adjacent, selective references
 
-The previous Logic design was not based on the most popular or most complete repositories in the persistent-memory space. It used `archagent`, Grove, testing/property concepts, and agent-rule guidance, but omitted key memory systems such as `agentmemory`, `projectmem`, Beads, and OKF Agent Memory from its source catalog.
+| Source | Potentially useful idea | Why it is not a core source |
+|---|---|---|
+| [archagent](https://github.com/BenedatLLC/archagent) | Machine-checkable architecture invariants and drift checks | Primarily architecture-level; borrow only invariant/evidence techniques that directly protect product behavior. |
+| [Sensei](https://github.com/globulario/sensei) | Linking invariants, failure modes, proof obligations, and impact | Broader behavioral/architectural knowledge system; Logic Toolkit does not claim graph extraction, closure, or governance. |
+| [Grove](https://github.com/alxshelepenok/grove) | Explicit protocol invariants and evidence-bound completion | Primarily agent protocol/orchestration. Do not adopt its orchestration or persistence model in Logic Toolkit. |
 
-No single repository is the best source for the whole goal. The best-fit synthesis is:
+## Explicitly out of scope
 
-- use Superpowers as a reference for session/skill activation and agent workflow;
-- use agentmemory, projectmem, common-knowledge and OKF Agent Memory for persistent memory, retrieval, provenance, and cross-agent portability;
-- use archagent and property/model-based testing for invariants, state transitions, and evidence;
-- use Beads only when the project also needs dependency-aware task tracking.
+General coding-agent memory, session retrieval, task/dependency tracking, skill workflow systems, and multi-agent orchestration are not sources for Logic Toolkit's core behavior-analysis method. Examples include [agentmemory](https://github.com/rohitg00/agentmemory), [Beads](https://github.com/gastownhall/beads), and [Superpowers](https://github.com/obra/superpowers). They may inform a separate memory or multi-agent product, but they do not answer whether a product feature has coherent states, transitions, effects, and invariants.
 
-Stars alone do not prove quality. For adoption, evaluate license, active maintenance, tests/CI, agent compatibility, data model, security, portability, and scope fit. This document records research and design guidance; it does not claim these repositories' code or features are integrated.
+Project-local `.logic/` files are a deliberately small support mechanism for preserving **decided product behavior** between development conversations. They are not a generic agent memory engine, chat archive, task tracker, or agent coordination protocol.
 
-## Recommended next design improvements
+## Design conclusions
 
-1. Keep project behavior records separate from reusable cross-project patterns.
-2. Add provenance, trust/status, reviewed date, verification method, and scope to each memory entry.
-3. Require search-before-write and deduplicate concepts before adding memory.
-4. Add deterministic validation for record shape and references; keep semantic judgment agent-assisted.
-5. Add optional agent-specific activation adapters (AGENTS.md, Codex skill, Claude hooks, MCP) while keeping Markdown as the portable source of truth.
-6. Treat the current keyword scanner as candidate discovery only. Do not describe it as a logic validator or automatic pattern extractor.
+1. Start from the behavior: actor/action, preconditions, input bounds, states, transitions, effects, failures, retries, cancellation, and recovery.
+2. Make invariants observable and pair important ones with proportionate evidence: examples, decision tables, stateful/model-based tests, or property-based tests.
+3. Trace cross-surface consequences (such as theme, permissions, loading, localization, and accessibility) instead of analyzing only the edited control.
+4. Use `.logic/` to preserve confirmed behavior decisions and unresolved behavior questions. Keep product scope and acceptance criteria with Spec Driven.
+5. Keep reusable patterns behavior-specific, generalized, evidence-linked, and human-reviewed. A keyword scan only proposes candidate passages.
+6. Do not introduce testing libraries or runtime dependencies solely because an upstream reference uses them.
+
+This evaluation is a scoped design comparison, not a claim that the toolkit has exhaustively benchmarked every repository or that star counts rank quality.
