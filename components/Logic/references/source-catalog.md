@@ -11,13 +11,13 @@ This toolkit is an original composition. It borrows concepts, not code, and shou
 | [OpenAI design-system rules](https://github.com/openai/skills/blob/main/skills/.curated/figma-create-design-system-rules/SKILL.md) | Specific, actionable, prioritized rules with progressive disclosure | Design-system consistency is one domain of impact analysis, not the whole toolkit |
 | [Sensei](https://github.com/globulario/sensei) | Behavioral memory, invariants, failure modes, proof obligations, and architectural impact | We do not claim graph extraction, closure, or governance features |
 
-The research indicates that the missing combination is a lightweight, agent-facing behavior model that connects state transitions to dependent effects and repeatable edge-case checks.
+The research indicates that Logic needs a lightweight, agent-facing behavior model that connects persistent project memory to state transitions, dependent effects, and repeatable edge-case checks. See `docs/logic-source-evaluation.md` for a dated comparison of more popular and more specialized candidates.
 
 ## Excluded overlap
 
 The existing local toolkits remain the owners of their current concerns:
 
 - `spec-driven-product-toolkit`: profiles, specification-to-implementation workflow, product tests, technical audits, and release-quality gates.
-- `product-stewardship-toolkit`: repository hygiene, authorship/attribution, provenance, documentation integrity, public release, handoff, and maintenance checks.
+- `ops-toolkit`: repository hygiene, authorship/attribution, provenance, documentation integrity, public release, handoff, and maintenance checks.
 
 This toolkit therefore does not add replacement profiles, release gates, repository inspection reports, attribution files, or a second audit lifecycle. It contributes only behavior models and evidence about application logic.

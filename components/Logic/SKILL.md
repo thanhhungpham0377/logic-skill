@@ -1,9 +1,9 @@
 ---
-name: logic-development-toolkit
-description: Prevent incomplete or contradictory application behavior by modeling states, transitions, dependencies, invariants, and edge cases before and during implementation. Use for feature development, behavior changes, refactors, UI state changes, and any task where missing logic could cause repeated fixes. Do not use as a product-specification or repository-stewardship workflow.
+name: logic-toolkit
+description: Maintain persistent, project-specific behavior memory for coding agents; analyze feature states, transitions, dependencies, invariants, and edge cases, and identify reusable cross-project logic. Use across conversations whenever product behavior changes. Does not own product specifications or repository stewardship.
 ---
 
-# Logic Development Toolkit
+# Logic Toolkit
 
 Use this toolkit to make behavior complete before code is written and to keep changes consistent with existing behavior. The goal is not to produce more prose; it is to expose the logic that a feature depends on and turn important rules into checks.
 
@@ -31,14 +31,14 @@ Never promote a project-specific rule automatically. A candidate must be general
 ## Core distinction
 
 - `spec-driven-product-toolkit` decides what product capability is requested and how delivery is gated.
-- `logic-development-toolkit` discovers what must remain true for that capability to work across states, actors, surfaces, and failures.
-- `product-stewardship-toolkit` evaluates the long-term health, provenance, and handoff readiness of the repository.
+- `logic-toolkit` discovers and preserves what must remain true for behavior to work across states, actors, surfaces, failures, and conversations.
+- `ops-toolkit` evaluates repository hygiene, provenance, maintenance, and handoff readiness.
 
 Do not replace a product spec with a logic map, and do not treat a clean repository as evidence that behavior is complete.
 
 ## Strict non-overlap boundary
 
-This toolkit owns **behavioral completeness of an application change**. It does not own:
+This toolkit owns **behavioral completeness and continuity of an application's behavior across development conversations**. It does not own:
 
 - product discovery, prioritization, roadmap, requirements authoring, acceptance criteria, release profiles, or implementation/release gates;
 - repository metadata, attribution, provenance, documentation hygiene, public-release readiness, handoff readiness, or maintenance lifecycle checks;
@@ -52,7 +52,7 @@ Ask: “What is the smallest unit being evaluated?”
 
 - A **product requirement or delivery process** belongs to `spec-driven-product-toolkit`.
 - A **behavior change and its state/effect correctness** belongs here.
-- A **repository/product lifecycle or handoff condition** belongs to `product-stewardship-toolkit`.
+- A **repository/product lifecycle or handoff condition** belongs to `ops-toolkit`.
 
 If a task crosses boundaries, keep one owner per concern and pass artifacts between them. Do not duplicate their checklists or create a second source of truth.
 

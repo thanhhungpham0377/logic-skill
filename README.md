@@ -194,3 +194,5 @@ python components/Logic/scripts/scan_logic.py --project D:\path\to\project --wri
 ```
 
 The reusable logic library is bundled at `components/Logic/reusable-library/`.
+
+Research basis: [Logic source evaluation](docs/logic-source-evaluation.md) records the candidate repositories, observed popularity, fit, and the features that should inform future revisions.

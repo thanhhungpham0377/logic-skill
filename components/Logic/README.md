@@ -1,61 +1,44 @@
-# Logic Development Toolkit
+# Logic Toolkit
 
-Logic Development Toolkit helps AI-assisted development avoid the most expensive class of rework: code that works for the first visible path but is incomplete across states, transitions, dependencies, and failure modes.
+`logic-toolkit` là bộ cài đặt tích hợp ba toolkit độc lập:
 
-It is intentionally separate from product specification and product stewardship. Its unit of work is the **behavior change**.
+1. `spec-driven-product-toolkit` — sản phẩm cần xây gì và workflow delivery.
+2. `logic-toolkit` — behavior memory, invariant và logic pattern được giữ xuyên dự án/cuộc hội thoại.
+3. `ops-toolkit` — repository/product có maintainable, attributable và handoff-ready không.
 
-## Explicit non-goals
+Nó cũng có một **reusable logic library** để tích lũy các invariant, state pattern và behavior pattern có thể dùng qua nhiều dự án.
 
-This repository does not define product requirements, choose delivery/release profiles, run product audits, manage repository metadata, maintain attribution/provenance, or judge handoff/publication readiness. Those remain owned by the other toolkits.
+Bộ cài đặt này là orchestration layer, không hợp nhất nội dung hoặc tạo checklist trùng lặp. Mỗi toolkit giữ ownership và thư mục state riêng.
 
-## What it covers
+## Cài đặt
 
-- state and transition modeling;
-- invariant and precondition discovery;
-- impact analysis across dependent surfaces;
-- edge-case and failure-path matrices;
-- pattern reuse and duplication detection;
-- evidence-backed implementation review.
-
-## Suggested project layout
-
-```text
-.logic/
-  logic-map.md
-  state-model.md
-  invariants.md
-  edge-cases.md
-  patterns.md
-  decisions.md
+```powershell
+python logic_toolkit.py --target D:\path\to\your\app --profile balanced --check-only
+python logic_toolkit.py --target D:\path\to\your\app --profile balanced
+python logic_toolkit.py --target D:\path\to\your\app --profile balanced --ops-source D:\path\to\ops-toolkit
 ```
 
-## Relationship to the other toolkits
+Profiles được chuyển tiếp cho spec toolkit: `prototype`, `balanced`, `production`.
+
+Mặc định tool thứ ba được tìm ở thư mục sibling `ops-toolkit`. Dùng `--ops-source` nếu repo nằm ở nơi khác.
+
+Kết quả:
 
 ```text
-specification → logic model → implementation → stewardship
+.toolkit/                  # manifest và hướng dẫn tích hợp
+.spec-product/             # spec-driven-product-toolkit
+.logic/                    # Logic Toolkit persistent behavior memory
+.steward/                  # ops-toolkit
 ```
 
-The logic model is the bridge: it translates a product request into behavior that can remain correct under real state changes.
+Script không tự cài package ngoài, không ghi đè state đã có, và trả exit code khác 0 khi thiếu component hoặc phát hiện xung đột.
 
-## Ownership boundaries
+## Quét logic để tái sử dụng
 
-| Concern | Owner | Output consumed here |
-|---|---|---|
-| What should be built and how delivery is gated | `spec-driven-product-toolkit` | Product request, acceptance criteria, implementation context |
-| Whether the behavior is complete across states, effects, and failures | This toolkit | Logic map, state model, invariants, edge-case matrix |
-| Whether the repository/product is maintainable, attributable, and handoff-ready | `product-stewardship-toolkit` | Logic evidence and implementation artifacts |
+```powershell
+python logic-toolkit\scripts\scan_logic.py `
+  --project D:\path\to\your\app `
+  --write-report
+```
 
-The three toolkits may be composed, but their artifacts and decisions must remain separate. A logic map is not a product spec, and passing a logic review is not a stewardship or release approval.
-
-## Design principles
-
-- model behavior before editing code;
-- distinguish facts, assumptions, and decisions;
-- prefer existing patterns over new local logic;
-- make invariants executable where practical;
-- use AI for discovery and synthesis, deterministic checks for evidence;
-- report uncertainty instead of hiding it.
-
-## Status
-
-This is the initial workflow and reference model. It is designed to grow through real failure cases, not by accumulating generic rules.
+Scanner chỉ đề xuất candidate. Pattern chỉ được đưa vào `library/` sau khi đã loại bỏ chi tiết project-specific và kiểm tra portability.
