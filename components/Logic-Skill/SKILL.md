@@ -1,6 +1,6 @@
 ---
 name: logic-skill
-description: Analyze and preserve product feature logic: actors, states, transitions, invariants, effects, failure paths, and cross-surface consistency. Use when designing or changing application behavior to expose missing logic before implementation and verify it afterward. Does not own product specifications, repository stewardship, or multi-agent orchestration.
+description: "Analyze and preserve product feature logic: actors, states, transitions, invariants, effects, failure paths, and cross-surface consistency. Use when designing or changing application behavior to expose missing logic before implementation and verify it afterward. Does not own product specifications, repository stewardship, or multi-agent orchestration."
 ---
 
 # Logic Skill
