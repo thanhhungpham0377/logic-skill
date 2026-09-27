@@ -29,7 +29,7 @@ Agent searches `.logic/index.md` for checkout, reads its feature record and late
 After a project establishes an idempotent mutation rule:
 
 ```powershell
-python components/Logic/scripts/scan_logic.py --project D:\path\to\project --write-report
+python components/Logic-Skill/scripts/scan_logic.py --project D:\path\to\project --write-report
 ```
 
-Review the candidate, generalize it, add evidence and portability notes, then append it to `components/Logic/reusable-library/index.md`.
+Review the candidate, generalize it, add evidence and portability notes, then append it to `components/Logic-Skill/reusable-library/index.md`.

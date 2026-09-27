@@ -1,6 +1,6 @@
 # Source Catalog
 
-Logic Toolkit is an original, product-behavior-focused composition. It borrows ideas, not code. This catalog documents conceptual references; it does not imply a dependency or integration.
+Logic Skill is an original, product-behavior-focused composition. It borrows ideas, not code. This catalog documents conceptual references; it does not imply a dependency or integration.
 
 | Source | Relevant concept | Boundary |
 |---|---|---|
@@ -17,7 +17,7 @@ General agent memory, task tracking, coding workflow, and multi-agent orchestrat
 ## Non-overlap
 
 - `spec-driven-product-toolkit` owns product scope, requirements/specification authoring, acceptance criteria, delivery workflow, and release gates.
-- Logic Toolkit owns behavior completeness: state, transitions, conditions, effects, invariants, cross-surface impact, and failure/recovery paths.
+- Logic Skill owns behavior completeness: state, transitions, conditions, effects, invariants, cross-surface impact, and failure/recovery paths.
 - `ops-toolkit` owns repository hygiene, provenance, maintenance, and handoff.
 - Multi-agent delegation and orchestration belong to a separate tool.
 

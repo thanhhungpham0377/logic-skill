@@ -17,7 +17,7 @@ Do not merge their checklists or let one component silently take ownership of an
 | User request | Read first | Primary output |
 |---|---|---|
 | New product capability, scope, acceptance criteria, release profile | `components/Spec-Driven/` | specification and delivery context |
-| Feature behavior, state, edge case, UI/API consistency, bug logic | `components/Logic/` | behavior map, state model, invariants, decisions |
+| Feature behavior, state, edge case, UI/API consistency, bug logic | `components/Logic-Skill/` | behavior map, state model, invariants, decisions |
 | Repository cleanup, provenance, docs, maintenance, handoff | `components/Ops/` | evidence-backed ops report |
 | Feature work involving more than one concern | read Spec Driven → Logic → Ops | separate artifacts with explicit ownership |
 
@@ -40,10 +40,10 @@ Do not store raw transcripts, secrets, or personal data. Separate confirmed fact
 
 ## Cross-project reuse
 
-Before creating a new cross-cutting rule, search `components/Logic/reusable-library/`. After a feature stabilizes, run:
+Before creating a new cross-cutting rule, search `components/Logic-Skill/reusable-library/`. After a feature stabilizes, run:
 
 ```powershell
-python components/Logic/scripts/scan_logic.py --project D:\path\to\project --write-report
+python components/Logic-Skill/scripts/scan_logic.py --project D:\path\to\project --write-report
 ```
 
 The scanner proposes candidates only. Promote a candidate only after removing project-specific assumptions, adding a verification method, and documenting portability. Never treat a project-specific rule as a global rule automatically.

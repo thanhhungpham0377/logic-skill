@@ -1,4 +1,4 @@
-"""Install the three non-overlapping development toolkits as one composition."""
+"""Install the three non-overlapping development skills as one composition."""
 from __future__ import annotations
 
 import argparse
@@ -61,7 +61,7 @@ def main() -> int:
     )
     missing_sources = check_component_sources(components)
     if missing_sources:
-        print("Missing sibling toolkits: " + ", ".join(missing_sources), file=sys.stderr)
+        print("Missing sibling skills: " + ", ".join(missing_sources), file=sys.stderr)
         return 2
 
     state = target / ".toolkit"
@@ -108,7 +108,7 @@ def main() -> int:
         ("ops", components["ops"], ".steward"),
     ):
         pointer = target / state_dir / "SOURCE.md"
-        write_text(pointer, f"# {name}\n\nInstalled by `toolkit`. Source of truth: `{path}`.\n")
+        write_text(pointer, f"# {name}\n\nInstalled by `logic-skill`. Source of truth: `{path}`.\n")
 
     logic_state = target / ".logic"
     write_text(logic_state / "README.md", """# Product Logic Records\n\nThese records preserve the project's confirmed product behavior decisions so later feature work can find the relevant states, transitions, invariants, effects, and unresolved behavior questions. They support product-logic analysis; they are not a general agent memory engine, chat archive, task tracker, or multi-agent coordination channel.\n\nKeep confirmed facts, user decisions, proposals, and unverified assumptions distinct. Link to authoritative product specifications rather than copying them. Do not store raw transcripts or secrets.\n""")
@@ -118,11 +118,11 @@ def main() -> int:
     write_text(logic_state / "LIBRARY.md", f"# Reusable Logic Library\n\nShared library source: `{ROOT / 'library'}`. Search it before inventing a new cross-cutting behavior.\nUse `scan_logic.py` to propose candidates after a feature stabilizes.\n")
 
     write_text(state / "manifest.json", json.dumps(manifest, indent=2) + "\n")
-    write_text(state / "README.md", """# Logic Toolkit integration\n\nThis directory contains project-specific product behavior records. Read relevant records when designing or changing a feature, then update them when behavior decisions become durable. These records support logic analysis; they are not a general agent-memory engine or multi-agent coordination channel.\n\nOwnership: Spec Driven defines product scope and delivery; Logic analyzes behavior completeness, states, invariants, effects, and cross-project behavior patterns; Ops maintains repository health and handoff readiness. Multi-agent assignment and coordination belong to a separate tool.\n\nState directories remain separate: `.spec-product/`, `.logic/`, and `.steward/`.\n""")
+    write_text(state / "README.md", """# Logic Skill integration\n\nThis directory contains project-specific product behavior records. Read relevant records when designing or changing a feature, then update them when behavior decisions become durable. These records support logic analysis; they are not a general agent-memory engine or multi-agent coordination channel.\n\nOwnership: Spec Driven defines product scope and delivery; Logic Skill analyzes behavior completeness, states, invariants, effects, and cross-project behavior patterns; Ops maintains repository health and handoff readiness. Multi-agent assignment and coordination belong to a separate skill.\n\nState directories remain separate: `.spec-product/`, `.logic/`, and `.steward/`.\n""")
     write_text(state / "index.md", """# Logic Memory Index\n\nAdd one row for each durable feature or cross-cutting behavior.\n\n| Feature/concept | Record | States/invariants | Last reviewed | Open questions |\n|---|---|---|---|---|\n""")
     write_text(state / "features/.gitkeep", "")
     write_text(state / "sessions/.gitkeep", "")
-    print(f"Installed toolkit at {state}")
+    print(f"Installed skill at {state}")
     return 2 if spec_rc == 2 else 0
 
 

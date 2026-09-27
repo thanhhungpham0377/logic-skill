@@ -1,9 +1,9 @@
 ---
-name: logic-toolkit
+name: logic-skill
 description: Analyze and preserve product feature logic: actors, states, transitions, invariants, effects, failure paths, and cross-surface consistency. Use when designing or changing application behavior to expose missing logic before implementation and verify it afterward. Does not own product specifications, repository stewardship, or multi-agent orchestration.
 ---
 
-# Logic Toolkit
+# Logic Skill
 
 Use this toolkit to make product behavior logically complete before code is written and consistent with existing behavior afterward. The goal is not to produce more prose; it is to expose missing states, transitions, conditions, effects, and failure paths, then turn important rules into checks.
 
@@ -39,21 +39,21 @@ For visual behavior, reason across semantic roles rather than one component at a
 
 ## Cross-project logic reuse
 
-When installed through `logic-toolkit`, also consult the reusable logic library. Before inventing a rule, search the library for an applicable pattern. After a feature stabilizes, scan the project's `.logic/` records for candidates that are portable across projects.
+When installed through `logic-skill`, also consult the reusable logic library. Before inventing a rule, search the library for an applicable pattern. After a feature stabilizes, scan the project's `.logic/` records for candidates that are portable across projects.
 
 Never promote a project-specific rule automatically. A candidate must be generalized, stripped of identifiers and assumptions, linked to evidence, and reviewed for portability before entering the shared library. Keep project-specific behavior in `.logic/features/`; keep reusable product-behavior abstractions in the library. The scanner finds possible text candidates only; it does not infer, validate, or promote logic.
 
 ## Core distinction
 
 - `spec-driven-product-toolkit` decides what product capability is requested and how delivery is gated.
-- `logic-toolkit` discovers and preserves what must remain true for behavior to work across states, actors, surfaces, failures, and conversations.
+- `logic-skill` discovers and preserves what must remain true for behavior to work across states, actors, surfaces, failures, and conversations.
 - `ops-toolkit` evaluates repository hygiene, provenance, maintenance, and handoff readiness.
 
 Do not replace a product spec with a logic map, and do not treat a clean repository as evidence that behavior is complete.
 
 ## Strict non-overlap boundary
 
-This toolkit owns **logical completeness and consistency of product behavior during development**. It does not own:
+This skill owns **logical completeness and consistency of product behavior during development**. It does not own:
 
 - product discovery, prioritization, roadmap, requirements authoring, acceptance criteria, release profiles, or implementation/release gates;
 - repository metadata, attribution, provenance, documentation hygiene, public-release readiness, handoff readiness, or maintenance lifecycle checks;

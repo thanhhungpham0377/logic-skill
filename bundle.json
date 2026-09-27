@@ -5,9 +5,9 @@
   "components": [
     {
       "id": "logic",
-      "display_name": "Logic",
-      "path": "components/Logic",
-      "owns": "behavioral completeness, persistent logic memory, invariants, reusable patterns"
+      "display_name": "Logic Skill",
+      "path": "components/Logic-Skill",
+      "owns": "product behavior completeness, state transitions, invariants, effects, failures, and reusable logic patterns"
     },
     {
       "id": "ops",

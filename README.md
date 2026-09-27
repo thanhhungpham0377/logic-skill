@@ -84,12 +84,12 @@ Report current state and unresolved decisions before editing code.
 ### 4. Scan for reusable logic
 
 ```powershell
-python components/Logic/scripts/scan_logic.py `
+python components/Logic-Skill/scripts/scan_logic.py `
   --project D:\path\to\your-project `
   --write-report
 ```
 
-Review `.logic/reusable-candidates.md`. Promote only generalized rules with evidence into `components/Logic/reusable-library/index.md`.
+Review `.logic/reusable-candidates.md`. Promote only generalized rules with evidence into `components/Logic-Skill/reusable-library/index.md`.
 
 ## What happens during a conversation
 
@@ -184,15 +184,15 @@ Before claiming a feature is complete, the agent should report:
 Install each component using its own instructions. The component boundaries are intentional:
 
 - `components/Spec-Driven/SKILL.md`
-- `components/Logic/SKILL.md`
+- `components/Logic-Skill/SKILL.md`
 - `components/Ops/README.md`
 
 For reusable logic discovery, use:
 
 ```powershell
-python components/Logic/scripts/scan_logic.py --project D:\path\to\project --write-report
+python components/Logic-Skill/scripts/scan_logic.py --project D:\path\to\project --write-report
 ```
 
-The reusable product-behavior logic library is bundled at `components/Logic/reusable-library/`.
+The reusable product-behavior logic library is bundled at `components/Logic-Skill/reusable-library/`.
 
 Research basis: [Logic source evaluation](docs/logic-source-evaluation.md) focuses on state modeling and invariant/stateful testing. General agent memory, task-tracking, and multi-agent orchestration repositories are explicitly outside Logic's core scope.

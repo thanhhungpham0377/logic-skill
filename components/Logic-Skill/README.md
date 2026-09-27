@@ -1,21 +1,21 @@
-# Logic Toolkit
+# Logic Skill
 
-`logic-toolkit` là bộ cài đặt tích hợp ba toolkit độc lập:
+`logic-skill` là skill tập trung vào logic hành vi sản phẩm, được đóng gói cùng hai skill độc lập khác trong bundle:
 
 1. `spec-driven-product-toolkit` — sản phẩm cần xây gì và workflow delivery.
-2. `logic-toolkit` — phân tích tính đầy đủ và nhất quán của logic hành vi sản phẩm: state, transition, điều kiện, effect, invariant, lỗi và các bề mặt phụ thuộc.
+2. `logic-skill` — phân tích tính đầy đủ và nhất quán của logic hành vi sản phẩm: state, transition, điều kiện, effect, invariant, lỗi và các bề mặt phụ thuộc.
 3. `ops-toolkit` — repository/product có maintainable, attributable và handoff-ready không.
 
-`.logic/` lưu các quyết định hành vi đã xác nhận để những lần phát triển tiếp theo không làm mất ngữ cảnh; đây là cơ chế hỗ trợ, không phải mục tiêu chính hay general-purpose agent memory. Toolkit cũng có **reusable logic library** để tích lũy các invariant, state pattern và behavior pattern có bằng chứng, có thể dùng qua nhiều dự án.
+`.logic/` lưu các quyết định hành vi đã xác nhận để những lần phát triển tiếp theo không làm mất ngữ cảnh; đây là cơ chế hỗ trợ, không phải mục tiêu chính hay general-purpose agent memory. Skill cũng có **reusable logic library** để tích lũy các invariant, state pattern và behavior pattern có bằng chứng, có thể dùng qua nhiều dự án.
 
-Bộ cài đặt này là integration layer, không hợp nhất nội dung hoặc tạo checklist trùng lặp. Mỗi toolkit giữ ownership và thư mục state riêng. Điều phối multi-agent thuộc tool riêng, không thuộc Logic Toolkit.
+Skill này là một thành phần trong integration layer, không hợp nhất nội dung hoặc tạo checklist trùng lặp. Mỗi skill giữ ownership và thư mục state riêng. Điều phối multi-agent thuộc skill riêng, không thuộc Logic Skill.
 
 ## Cài đặt
 
 ```powershell
-python logic_toolkit.py --target D:\path\to\your\app --profile balanced --check-only
-python logic_toolkit.py --target D:\path\to\your\app --profile balanced
-python logic_toolkit.py --target D:\path\to\your\app --profile balanced --ops-source D:\path\to\ops-toolkit
+python logic_skill.py --target D:\path\to\your\app --profile balanced --check-only
+python logic_skill.py --target D:\path\to\your\app --profile balanced
+python logic_skill.py --target D:\path\to\your\app --profile balanced --ops-source D:\path\to\ops-toolkit
 ```
 
 Profiles được chuyển tiếp cho spec toolkit: `prototype`, `balanced`, `production`.
@@ -36,7 +36,7 @@ Script không tự cài package ngoài, không ghi đè state đã có, và tr�
 ## Quét logic để tái sử dụng
 
 ```powershell
-python logic-toolkit\scripts\scan_logic.py `
+python logic-skill\scripts\scan_logic.py `
   --project D:\path\to\your\app `
   --write-report
 ```
